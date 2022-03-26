@@ -1,6 +1,8 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+"""
+main函数，程序入口
+"""
 __author__ = 'komorebi'
 
 import sys
@@ -24,8 +26,8 @@ def main(argv):
         if test_choice == "n":
             array_list = eval(input("请输入你的数组：\n"))
         elif test_choice == "y":
-            filePath=input("请输入文件路径：")
-            with open(filePath, "r") as fopen:
+            file_path=input("请输入文件路径：")
+            with open(file_path, mode='r', buffering=-1, encoding='utf-8') as fopen:
                 array_list = eval(fopen.readline())
     elif len(argv) == 1:
         array_list = eval(argv[0])
@@ -34,11 +36,11 @@ def main(argv):
     array_numpy = np.array(array_list)
     dimension = len(array_numpy.shape)
     if dimension == 1:
-        max = MSA(array_numpy.shape[0],array_list).Calc()
-        print("该一维数组其最大子数组之和为：%d" % max)
+        the_max = MSA(array_numpy.shape[0],array_list).calc()
+        print("该一维数组其最大子数组之和为：{}".format(the_max))
     elif dimension == 2:
-        max = MSA2D(array_numpy.shape[0],array_numpy.shape[1],array_list).Calc()
-        print("该二维矩阵其和最大的子矩阵和为：%d" % max)
+        the_max = MSA2D(array_numpy.shape[0],array_numpy.shape[1],array_list).calc()
+        print("该二维矩阵其和最大的子矩阵和为：{}".format(the_max))
     else:
         assert 0,"请输入正确的一维或二维数组"
 
@@ -46,7 +48,7 @@ if __name__ == '__main__':
     try:
         main(sys.argv[1:])
     except KeyboardInterrupt:
-        exit(0)
+        sys.exit(0)
     except OSError as err:
         print("OS error: {0}".format(err))
     except:
