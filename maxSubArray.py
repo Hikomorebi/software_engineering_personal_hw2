@@ -9,7 +9,7 @@ class MSA():
         self.num = num
         self.array = array
     """
-    一维数组求最大子数组
+    一维数组求最大子数组，使用动态规划
     """
     def Calc(self):
         dp = []
@@ -20,10 +20,3 @@ class MSA():
             else:
                 dp.append(self.array[i] + dp[i - 1])
         return max(dp)
-
-    """
-    二维数组求最大子数组
-    """
-
-if __name__ == '__main__':
-    choice = int(input("功能：\n1、一维数组求最大子数组之和\n2、二维数组求最大子数组之和\n请选择："))
