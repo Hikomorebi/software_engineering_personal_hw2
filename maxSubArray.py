@@ -18,11 +18,14 @@ class MSA():
         一维数组求最大子数组，使用动态规划
         :return:
         """
-        dp_list = []
-        dp_list.append(self.array[0])
-        for i in range(1, self.num):
-            if dp_list[i - 1] < 0:
-                dp_list.append(self.array[i])
-            else:
-                dp_list.append(self.array[i] + dp_list[i - 1])
-        return max(dp_list)
+        try:
+            dp_list = []
+            dp_list.append(self.array[0])
+            for i in range(1, self.num):
+                if dp_list[i - 1] < 0:
+                    dp_list.append(self.array[i])
+                else:
+                    dp_list.append(self.array[i] + dp_list[i - 1])
+            return max(dp_list)
+        except:
+            pass

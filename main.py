@@ -20,6 +20,7 @@ def main(argv):
     :param argv:
     :return:
     """
+    assert len(argv) in (0,1),"参数错误"
     if len(argv) == 0:
         test_choice = input("是否使用某个文件作为输入？(y/n)：")
         assert test_choice in ("y","n"),"请输入y或者n"
@@ -29,20 +30,19 @@ def main(argv):
             file_path=input("请输入文件路径：")
             with open(file_path, mode='r', buffering=-1, encoding='utf-8') as fopen:
                 array_list = eval(fopen.readline())
-    elif len(argv) == 1:
-        array_list = eval(argv[0])
     else:
-        assert 0,"参数错误"
+        array_list = eval(argv[0])
     array_numpy = np.array(array_list)
     dimension = len(array_numpy.shape)
+    the_max = None
+    assert dimension in (1,2),"请输入正确的一维或二维数组"
     if dimension == 1:
         the_max = MSA(array_numpy.shape[0],array_list).calc()
         print("该一维数组其最大子数组之和为：{}".format(the_max))
-    elif dimension == 2:
+    else:
         the_max = MSA2D(array_numpy.shape[0],array_numpy.shape[1],array_list).calc()
         print("该二维矩阵其和最大的子矩阵和为：{}".format(the_max))
-    else:
-        assert 0,"请输入正确的一维或二维数组"
+    return the_max
 
 if __name__ == '__main__':
     try:
